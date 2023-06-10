@@ -18,7 +18,7 @@ const Register =()=>{
                 <label for="email">Verificar contraseña: </label>
                 <input type="password" placeholder="******" id="password" name="password"/>
             </form>
-            <button className ="access-btn">Registrarse</button>
+            <button className ="blue-btn">Registrarse</button>
             <button className="account-btn"> ¿Ya estas registrado? Iniciar Sesión</button>
             <button className="gray-btn"> <i class="fa-brands fa-google"></i> &nbsp; Registrarse con Google</button>
         </div>
