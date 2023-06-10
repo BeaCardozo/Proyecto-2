@@ -1,0 +1,85 @@
+.container-wrap, .card{
+    height: 450px;
+    max-width: 300px;
+    margin: auto;
+    position: relative;
+}
+
+.container-wrap{
+    perspective: 900px;
+}
+
+.card{
+    text-align: center;
+    transition: all 1.5s cubic-bezier(0.7, -.5, 0.3, 1.8);
+    transform-style: preserve-3d;
+    margin: 10px;
+}
+
+.container-wrap:hover .card {
+    transform: rotateY(180deg);
+}
+
+.front-card, .back-card{
+    width: 300px;
+    position: relative;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+}
+
+.front-card {
+    cursor: pointer;
+    height: 100%;
+    background-image: url(test.jpg);
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center center;
+}
+
+.back-card {
+    transform: rotateY(180deg);
+    position: absolute;
+    border-radius: 50px;
+    height: 450px;
+    background-color: #9dc1fb;
+    border-width: 15px;
+    border-style: double;
+    Border-color: white
+}
+
+
+.movie-info{
+    padding-top: 25%;
+    justify-content: center;
+}
+
+.movie-info hr{
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.movie-info h2{
+    font-size: 30px;
+    margin: 10px;
+    font-weight: 700;
+}
+
+.movie-info h4{
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.movie-info h4 i {
+    font-size: 15px;
+    margin: 0 10px
+}
+
+
+
+
+    

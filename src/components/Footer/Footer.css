@@ -1,0 +1,133 @@
+.section{
+    padding: 3rem 3rem;
+    text-align: center;
+    width: 100%;
+}
+
+.footer{
+    background-color: #242582;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-links{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.footer-links_div{
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+.footer-links_div h4{
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 0.7rem;
+}
+
+.footer-links_div p{
+    font-size: 12px;
+    line-height: 15px;
+    margin: 0.5rem 0;
+    cursor: pointer;
+}
+
+.footer-links_div p:hover{
+    font-weight: 900;
+}
+
+.footer-below{
+    margin-top: 0.2rem;
+    text-align: center;
+}
+
+.footer-below-links{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    justify-content: center;
+}
+
+.footer-below-links p{
+    font-size: 15px;
+    line-height: 15px;
+    margin-left: 2rem;
+    color: white;
+    font-weight: 500;
+}
+
+hr{
+    color: white !important;
+    width: 100%;
+}
+
+.footer-copyright p {
+    font-size: 13px;
+    line-height: 15px;
+    color: rgb(255, 255, 255);
+    font-weight: 900;
+    padding: 1.5rem;
+}
+
+@media screen and (max-width: 850px){
+    .footer-heading h1{
+        font-size: 44px;
+        line-height: 50px;
+    }    
+}
+
+@media screen and (max-width: 550px){
+    .footer-heading h1{
+        font-size: 34px;
+        line-height: 42px;
+    }    
+
+    .footer-links div {
+        margin: 1rem 0;
+    }
+
+    .footer-btn p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .footer-below {
+        flex-direction: column;
+        justify-content: left;
+    }
+
+    .footer-below-links{
+        flex-direction: column;
+    }
+
+    .footer-below-links p {
+        margin-left: 0rem;
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .footer-heading h1 {
+        font-size: 27px;
+        line-height: 38px;
+    }
+}
+
+
