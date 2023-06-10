@@ -1,10 +1,21 @@
 
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { createUserWithEmailAndPassword, getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  query,
+} from "firebase/firestore";
 
+import { useNavigate } from 'react-router-dom';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,7 +37,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-
+// Iniciar con Google
 
 export const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
@@ -37,9 +48,26 @@ export const signInWithGoogle = () => {
   
         localStorage.setItem("name", name);
         localStorage.setItem("email", email);
+
+        routeChange("/")
         
       })
       .catch((error) => {
         console.log(error);
       });
 }
+
+
+export async function signUp(email, password) {
+  let result = null,
+      error = null;
+  try {
+      result = await createUserWithEmailAndPassword(auth, email, password);
+  } catch (e) {
+      error = e;
+  }
+
+  return { result, error };
+}
+
+

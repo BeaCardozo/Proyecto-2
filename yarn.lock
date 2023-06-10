@@ -417,7 +417,7 @@
   resolved "https://registry.npmjs.org/@firebase/firestore-types/-/firestore-types-2.5.1.tgz"
   integrity sha512-xG0CA6EMfYo8YeUxC8FeDzf6W3FX1cLlcAGBYV6Cku12sZRI81oWcu61RSKM66K6kUENP+78Qm8mvroBcm1whw==
 
-"@firebase/firestore@3.12.2":
+"@firebase/firestore@^3.12.2", "@firebase/firestore@3.12.2":
   version "3.12.2"
   resolved "https://registry.npmjs.org/@firebase/firestore/-/firestore-3.12.2.tgz"
   integrity sha512-6EDIJ2V4hlUkPvAb1uH5DAz65ZvhStIM1oYGSUx6mt2UdEDu/0CAVS7xYBY6niTyM/+2r6XBW3hYG/1x1V27vg==
