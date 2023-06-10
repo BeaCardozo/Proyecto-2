@@ -7,7 +7,10 @@ import "../../App.css"
 import "../../components/Login/Login.css"
 
 
-function LandingPage() {
+const LandingPage = (props) => {
+  const Now_playing = props.Now_playing;
+  const Upcoming = props.Upcoming;
+  
   return (
     <div className="main">
       <Hero hero={HeroData}/>
@@ -15,23 +18,23 @@ function LandingPage() {
       <div className="container-form">
         <Title title="Cartelera"/>
           <form className ="form" action="">
-            <input placeholder="Busca tu película favorita"/>
+            <input type="text" placeholder="Busca tu película favorita"/>
             <button className ="blue-btn">Buscar</button>
           </form>
         </div>
         <div className="cards-container">
-            <Card/>
-            <Card/>
-            <Card/>
+          {Now_playing.map((movie)=>(
+              <Card title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path}/>
+          ))}
         </div>
       </section>
 
       <section className='next_releases-section'>
         <Title title="Próximos Estrenos"/>
          <div className="cards-container">
-            <Card/>
-            <Card/>
-            <Card/>
+         {Upcoming.map((movie)=>(
+              <Card title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path}/>
+          ))}
         </div>
       </section>
     </div>
@@ -40,4 +43,33 @@ function LandingPage() {
 
 
 export default LandingPage;
+
+
+/* <div className="main">
+      <Hero hero={HeroData}/>
+      
+      <section className='movies-section'>
+      <div className="container-form">
+        <Title title="Cartelera"/>
+          <form className ="form" action="">
+            <input type="text" placeholder="Busca tu película favorita"/>
+            <button className ="blue-btn">Buscar</button>
+          </form>
+        </div>
+        <div className="cards-container">
+          {Now_Playing.map((movie)=>(
+              <Card title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path}/>
+          ))}
+        </div>
+      </section>
+
+      <section className='next_releases-section'>
+        <Title title="Próximos Estrenos"/>
+         <div className="cards-container">
+         {Upcoming.map((movie)=>(
+              <Card title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path}/>
+          ))}
+        </div>
+      </section>
+    </div>*/
 

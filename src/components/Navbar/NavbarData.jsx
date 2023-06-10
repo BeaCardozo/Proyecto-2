@@ -26,7 +26,7 @@ export const MenuData = [
         cName: "nav-links-mobile"
     },
     {
-        title: "Iniciar Sesión",
+        title: "Iniciar",
         url: "/loginpage",
         cName: "nav-links-mobile-transparent"
     }
