@@ -14,6 +14,7 @@ import {
   updateDoc,
   query,
 } from "firebase/firestore";
+import { AuthContext } from "./AuthContext";
 
 import { useNavigate } from 'react-router-dom';
 
@@ -37,26 +38,46 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+
 // Iniciar con Google
 
+
+
+
 export const signInWithGoogle = () => {
+  return new Promise((resolve, reject) => {
+    
+
     signInWithPopup(auth, provider)
       .then((result) => {
         const name = result.user.displayName;
         const email = result.user.email;
-    
-  
+
         localStorage.setItem("name", name);
         localStorage.setItem("email", email);
 
-        routeChange("/")
         
+            clearInterval(interval);
+            resolve(email);
+          
+    
+
+        // Cerrar la ventana después de resolver la promesa
+        resolve(email);
       })
       .catch((error) => {
         console.log(error);
-      });
-}
 
+        if (error.code === "auth/cancelled-popup-request") {
+          // El usuario cerró la ventana emergente
+          reject(new Error("Autenticación cancelada por el usuario."));
+        } else {
+          // Otro tipo de error
+          reject(error);
+        }
+      });
+  });
+};
 
 export async function signUp(email, password) {
   let result = null,

@@ -1,52 +1,84 @@
-import React, {useState} from "react";
+import React, { useState, useContext } from "react";
 import "./Login.css";
 import "../../App.css";
 import Title from "../Title/Title";
-import {signInWithGoogle } from "../../Firebase.jsx";
-import { useNavigate } from 'react-router-dom';
-
-
-
-
-
-const Logingoogle = () => {
-    signInWithGoogle()
-    
-}
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { signInWithGoogle } from "../../Firebase.jsx";
+import { AuthContext } from "../../AuthContext";
 
 export default function Login() {
+  const { login } = useContext(AuthContext);
+  const auth = getAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  let navigate = useNavigate();
 
-let navigate = useNavigate();
+  const routeChange = (path) => {
+    navigate(path);
+  };
 
-const routeChange = (path) => {
+  const handleLogin = () => {
 
-      navigate(path);
-}
+    signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in
+    login(email, password);
+    const user = userCredential.user;
+    routeChange("/")
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
 
-const Login =()=>{
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    
+  };
 
-    const handleInfo = (e) => {
-        e.preventDefault();
-        console.log(email);
-    }
-}
+  const handleLoginWithGoogle = () => {
+    signInWithGoogle().then((email) => {
+        login(email,null)
+        // Hacer algo con el email
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+        // Manejar el error
+      });
+    
 
-    return(
-        <div className="container-form">
-            <Title title="Iniciar Sesión"/>
-            <form className ="form">
-                <label for="email">Email: </label>
-                <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="correo@email.com" id="email" name="email"/>
-                <label for="email">Contraseña: </label>
-                <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="******" id="password" name="password"/>
-            </form>
-            <button className ="blue-btn">Acceder</button>
-            <button onClick={() => routeChange("/register")} className="account-btn" > ¿No tienes cuenta? Registrate aquí!</button>
-            <button onClick={Logingoogle} className="gray-btn"> <i class="fa-brands fa-google"></i> &nbsp; Iniciar Sesión con Google</button>
-        </div>
-      
-    )
+  };
 
+  return (
+    <div className="container-form">
+      <Title title="Iniciar Sesión" />
+      <form className="form">
+        <label htmlFor="email">Email: </label>
+        <input
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="correo@email.com"
+          id="email"
+          name="email"
+        />
+        <label htmlFor="email">Contraseña: </label>
+        <input
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          placeholder="******"
+          id="password"
+          name="password"
+        />
+      </form>
+      <button onClick={handleLogin} className="blue-btn">
+        Acceder
+      </button>
+      <button onClick={() => routeChange("/register")} className="account-btn">
+        ¿No tienes cuenta? Registrate aquí!
+      </button>
+      <button onClick={handleLoginWithGoogle} className="gray-btn">
+        <i className="fa-brands fa-google"></i> &nbsp; Iniciar Sesión con Google
+      </button>
+    </div>
+  );
 }

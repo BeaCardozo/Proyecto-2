@@ -7,12 +7,13 @@ import LoginPage from "./pages/LoginPage/LoginPage"
 import Footer from "./components/Footer/Footer"
 import MovieDetails from "./pages/MovieDetails/MovieDetails"
 import ReservePage from "./pages/ReservePage/ReservePage"
-
+import { AuthProvider } from "./AuthContext";
 
 
 function App() {
   return (
     <>
+    <AuthProvider>
       <Navbar/>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
@@ -22,6 +23,7 @@ function App() {
         <Route path="/reserve" element={<ReservePage/>} />
       </Routes>
       <Footer/>
+      </AuthProvider>
     </>
   )
 }
