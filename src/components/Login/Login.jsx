@@ -9,6 +9,7 @@ import { AuthContext } from "../../AuthContext";
 
 export default function Login() {
   const { login } = useContext(AuthContext);
+  const { loginWithGoogle} = useContext(AuthContext);
   const auth = getAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,14 +38,17 @@ export default function Login() {
   };
 
   const handleLoginWithGoogle = () => {
-    signInWithGoogle().then((email) => {
-        login(email,null)
-        // Hacer algo con el email
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-        // Manejar el error
-      });
+   
+
+    loginWithGoogle().then(() => {
+      // Signed in
+    
+    
+    routeChange("/")
+    })
+    // ...
+        
+     
     
 
   };
