@@ -38,6 +38,12 @@ export default function Register() {
   };
 
   const registrar = async () => {
+
+    if (!inputNombre || !inputEmail || !inputPassword || !inputConfirm) {
+      window.alert("Por favor, complete todos los campos");
+      return;
+    }
+
     if (inputPassword === inputConfirm) {
       const auth = getAuth();
 

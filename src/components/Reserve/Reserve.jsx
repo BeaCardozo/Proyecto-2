@@ -12,9 +12,10 @@ const Reserve = () => {
   const [identification, setIdentification] = useState('');
   const [email, setEmail] = useState('');
   const [ticketQuantity, setTicketQuantity] = useState(0);
-  const {user} = useContext(AuthContext);
+  const user = auth.currentUser;
 
   const { id } = useParams(); // Obtener el ID de la película de la URL
+  
 
   const handleReserve = async (e) => {
     e.preventDefault();
@@ -28,6 +29,11 @@ const Reserve = () => {
         return;
       }
 
+      if (!name || !identification || !email || ticketQuantity <= 0) {
+        window.alert("Por favor, complete todos los campos y seleccione una cantidad de boletos válida");
+        return;
+      }
+
       // Crea un objeto con los datos de la reserva
       const reservationData = {
         name: name,
@@ -37,9 +43,11 @@ const Reserve = () => {
         movieId: id 
       };
 
-      const userUid = user.uid;
 
-      // Crea una nueva colección "reservations" en Firestore y agrega el documento con los datos de la reserva
+      
+
+      const userUid = user.uid;
+     
       const firestore = getFirestore();
       const reservationsCollection = collection(firestore, "users", userUid, "reservations");
       await addDoc(reservationsCollection, reservationData);
@@ -49,7 +57,7 @@ const Reserve = () => {
     } catch (error) {
       // Muestra un mensaje de error o redirige a la página de error de reserva
       window.alert("Error al realizar la reserva",error);
-      console.log(error)
+     
     }
   };
 

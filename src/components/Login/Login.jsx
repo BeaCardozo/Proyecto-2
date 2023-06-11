@@ -21,6 +21,13 @@ export default function Login() {
 
   const handleLogin = () => {
 
+
+    if (!email || !password) {
+      window.alert("Por favor, complete todos los campos");
+      return;
+    }
+
+
     signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed in
@@ -30,6 +37,7 @@ export default function Login() {
     // ...
   })
   .catch((error) => {
+    window.alert("Datos incorrecto");
     const errorCode = error.code;
     const errorMessage = error.message;
   });
