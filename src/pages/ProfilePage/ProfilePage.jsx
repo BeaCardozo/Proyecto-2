@@ -34,8 +34,12 @@ function Profile() {
           const response = await fetch(url);
           const movieDetails = await response.json();
 
-          // Agregar los datos de la película a la lista de películas favoritas
-          movies.push({ ...movieData, ...movieDetails });
+          // Verificar si la película ya está en la lista de películas favoritas
+          const isMovieInList = movies.some((movie) => movie.id === movieData.id);
+          if (!isMovieInList) {
+            // Agregar los datos de la película a la lista de películas favoritas
+            movies.push({ ...movieData, ...movieDetails });
+          }
         }
 
         setFavoriteMovies(movies);
@@ -48,16 +52,26 @@ function Profile() {
   }, []);
 
   return (
-    
-    <section className='next_releases-section'>
-    <Title title="Pelis Favoritas"/>
-      <h1>Peliculas favoritas</h1>
-     <div className="cards-container">
-        {favoriteMovies.map((movie) => (
-            <Card id={movie.id} title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path}/>
+    <section className="next_releases-section">
+      <Title title="Pelis Favoritas" />
+      
+      <div className="cards-container">
+      <h1 style={{ textAlign: 'center', fontWeight: 'bold' }}>PELICULAS FAVORITAS</h1>  
 
-    
+      <div className="cards-container">
+        {favoriteMovies.map((movie) => (
+          <Card
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            language={movie.original_language}
+            popularity={movie.popularity}
+            genres={movie.genres}
+            poster={movie.poster_path}
+          />
         ))}
+
+      </div>  
       </div>
     </section>
   );
