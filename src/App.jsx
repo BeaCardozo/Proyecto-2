@@ -9,6 +9,7 @@ import Footer from "./components/Footer/Footer"
 import MovieDetails from "./pages/MovieDetails/MovieDetails"
 import ReservePage from "./pages/ReservePage/ReservePage"
 import { useEffect, useState } from "react"
+import { AuthProvider } from "./AuthContext";
 
 
 
@@ -58,6 +59,7 @@ function App() {
   
   return (
     <>
+    <AuthProvider>
       <Navbar/>
       <Routes>
         <Route path="/" element={<LandingPage Now_playing={movies_Now_Playing}  Upcoming={movies_Upcoming}/>} />
@@ -67,6 +69,7 @@ function App() {
         <Route path="/reserve" element={<ReservePage/>} />
       </Routes>
       <Footer/>
+      </AuthProvider>
     </>
   )
 }

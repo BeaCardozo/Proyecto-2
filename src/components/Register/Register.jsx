@@ -1,29 +1,99 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import "../Login/Login.css";
 import Title from "../Title/Title";
-import "../../App.css"
+import "../../App.css";
+import { useNavigate } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithGoogle } from "../../Firebase.jsx";
+import { AuthContext } from "../../AuthContext";
 
-const Register =()=>{
+export default function Register() {
+  const { login } = useContext(AuthContext);
+  const [inputNombre, setInputNombre] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const [inputConfirm, setConfirm] = useState("");
 
-    return(
-        <div className="container-form">
-            <Title title="Crea tu cuenta"/>
-            <form className ="form">
-            <label for="email">Nombre Completo: </label>
-                <input type="name" placeholder="Ana López" id="email" name="name"/>
-                <label for="email">Email: </label>
-                <input type="email" placeholder="correo@email.com" id="email" name="email"/>
-                <label for="email">Contraseña: </label>
-                <input type="password" placeholder="******" id="password" name="password"/>
-                <label for="email">Verificar contraseña: </label>
-                <input type="password" placeholder="******" id="password" name="password"/>
-            </form>
-            <button className ="blue-btn">Registrarse</button>
-            <button className="account-btn"> ¿Ya estas registrado? Iniciar Sesión</button>
-            <button className="gray-btn"> <i class="fa-brands fa-google"></i> &nbsp; Registrarse con Google</button>
-        </div>
-      
-    )
+  let navigate = useNavigate();
+
+  const routeChange = (path) => {
+    navigate(path);
+  };
+
+  const registrar = async () => {
+    if (inputPassword === inputConfirm) {
+      const auth = getAuth();
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          inputEmail,
+          inputPassword
+        );
+
+        const user = userCredential.user;
+
+        // Iniciar sesión en el AuthContext después del registro
+        login(inputEmail, inputPassword);
+
+        routeChange("/");
+        
+      } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        window.alert("Ocurrió un error");
+      }
+    } else {
+      window.alert("Las contraseñas no coinciden");
+    }
+  };
+
+  return (
+    <div className="container-form">
+      <Title title="Crea tu cuenta" />
+      <form className="form">
+        <label htmlFor="name">Nombre Completo: </label>
+        <input
+          onChange={(e) => setInputNombre(e.target.value)}
+          type="name"
+          placeholder="Ana López"
+          id="name"
+          name="name"
+        />
+        <label htmlFor="email">Email: </label>
+        <input
+          onChange={(e) => setInputEmail(e.target.value)}
+          type="email"
+          placeholder="correo@email.com"
+          id="email"
+          name="email"
+        />
+        <label htmlFor="password">Contraseña: </label>
+        <input
+          onChange={(e) => setInputPassword(e.target.value)}
+          type="password"
+          placeholder="******"
+          id="password"
+          name="password"
+        />
+        <label htmlFor="password2">Verificar contraseña: </label>
+        <input
+          onChange={(e) => setConfirm(e.target.value)}
+          type="password"
+          placeholder="******"
+          id="password2"
+          name="password2"
+        />
+      </form>
+      <button onClick={registrar} className="blue-btn">
+        Registrarse
+      </button>
+      <button onClick={() => routeChange("/loginpage")} className="account-btn">
+        ¿Ya estás registrado? Iniciar Sesión
+      </button>
+      <button onClick={signInWithGoogle} className="gray-btn">
+        <i className="fa-brands fa-google"></i> &nbsp; Registrarse con Google
+      </button>
+    </div>
+  );
 }
-
-export default Register;
