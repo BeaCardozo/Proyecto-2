@@ -48,8 +48,8 @@ class Navbar extends Component {
                                         {"Reservar"}
                                     </Link>
                                 </li><li>
-                                        <Link to={"#"} className={"nav-links"}>
-                                            {"Contacto"}
+                                        <Link to={"profile"} className={"nav-links"}>
+                                            {"Perfil"}
                                         </Link>
                                     </li><li>
                                         <Link to={"#"} className={"nav-links"}>

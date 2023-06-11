@@ -5,11 +5,13 @@ import Navbar from "./components/Navbar/Navbar"
 import LandingPage from "./pages/LandingPage/LandingPage"
 import RegisterPage from "./pages/RegisterPage/RegisterPage"
 import LoginPage from "./pages/LoginPage/LoginPage"
+import Profile from "./pages/ProfilePage/ProfilePage";  
 import Footer from "./components/Footer/Footer"
 import MovieDetails from "./pages/MovieDetails/MovieDetails"
 import ReservePage from "./pages/ReservePage/ReservePage"
 import { useEffect, useState } from "react"
 import { AuthProvider } from "./AuthContext";
+
 
 
 
@@ -66,6 +68,7 @@ function App() {
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/moviedetails/:id" element={<MovieDetails />} />
         <Route path="/reserve" element={<ReservePage/>} />
+        <Route path="/profile" element={<Profile/>} />
       </Routes>
       <Footer/>
       </AuthProvider>
