@@ -5,10 +5,7 @@ import "../../App.css";
 
 const Card=(props)=>{
     const URL_IMAGE = 'https://image.tmdb.org/t/p/original'
-    const title = props.title;
-    const language = props.language;
-    const popularity = props.popularity;
-    const poster = props.poster;
+    const { title, language, popularity, poster, id } = props;
     
 
 
@@ -25,7 +22,9 @@ const Card=(props)=>{
                         <h4><i class="fa-solid fa-language"></i><strong>Idiomas: </strong>{language}</h4>
                         <h4><i class="fa-light fa-camera-movie"></i><strong>Géneros: </strong></h4> 
                         <h4><i class="fa-light fa-camera-movie"></i><strong>Popularidad: </strong> {popularity}</h4>
-                        <button className="blue-btn"><Link to="/moviedetails">Ver más</Link></button>
+                        <button className="blue-btn">
+                            <Link to={`/moviedetails/${id}`}>Ver más</Link>
+                        </button>
                     </div>
                 </div>
             </div>

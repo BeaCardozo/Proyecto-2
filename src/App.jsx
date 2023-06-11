@@ -26,26 +26,25 @@ function App() {
   const [trailer, seTrailer] = useState(null);
   const [movie, setMovie] = useState({title: "Loading Movies"});
 
-  const fetchNowMovies = async(searchKey) =>{
-    const type = searchKey ? "search" : "discover"
-    const {data: { results },} = await axios.get(`${API_URL_Now_Playing}/${type}/movie`, {
+  const fetchNowMovies = async (searchKey) => {
+    const type = searchKey ? "search" : "discover";
+    const { data: { results } } = await axios.get(API_URL_Now_Playing, {
       params: {
         api_key: API_KEY,
         query: searchKey
-      },
+      }
     });
-  setMovies_Now_Playing(results);
-  setMovie(results[0]);
+    setMovies_Now_Playing(results);
+    setMovie(results[0]);
   }
-
-
-  const fetchUpcomingMovies = async(searchKey) =>{
-    const type = searchKey ? "search" : "discover"
-    const {data: { results },} = await axios.get(`${API_URL_Upcoming}/${type}/movie`, {
+  
+  const fetchUpcomingMovies = async (searchKey) => {
+    const type = searchKey ? "search" : "discover";
+    const { data: { results } } = await axios.get(API_URL_Upcoming, {
       params: {
         api_key: API_KEY,
         query: searchKey
-      },
+      }
     });
     setMovies_Upcoming(results);
     setMovie(results[0]);
@@ -65,7 +64,7 @@ function App() {
         <Route path="/" element={<LandingPage Now_playing={movies_Now_Playing}  Upcoming={movies_Upcoming}/>} />
         <Route path="/loginpage" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
-        <Route path="/moviedetails" element={<MovieDetails/>} />
+        <Route path="/moviedetails/:id" element={<MovieDetails />} />
         <Route path="/reserve" element={<ReservePage/>} />
       </Routes>
       <Footer/>
