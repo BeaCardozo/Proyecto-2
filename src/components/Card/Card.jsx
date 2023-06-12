@@ -5,8 +5,9 @@ import "../../App.css";
 
 const Card=(props)=>{
     const URL_IMAGE = 'https://image.tmdb.org/t/p/original'
-    const { title, language, popularity, poster, id} = props;
+    const { title, language, popularity, poster, id, genre} = props;
     const released = props.released;
+    
 
 
     return(
@@ -20,7 +21,6 @@ const Card=(props)=>{
                     <h2>{title}</h2>
                     <hr></hr>
                         <h4><i class="fa-solid fa-language"></i><strong>Idiomas: </strong>{language}</h4>
-                        <h4><i class="fa-light fa-camera-movie"></i><strong>Géneros: </strong></h4> 
                         <h4><i class="fa-light fa-camera-movie"></i><strong>Popularidad: </strong> {popularity}</h4>
 
 

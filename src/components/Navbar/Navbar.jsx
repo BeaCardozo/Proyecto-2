@@ -51,6 +51,22 @@ class Navbar extends Component {
                                             {"Perfil"}
                                         </Link>    
                                     </li><li>
+                                  
+
+                                    </li>
+                                  
+                                    {user.email == "admin@gmail.com" ? (
+
+                                    <li>
+                                        <Link to={"admin"} className={"nav-links"}>
+                                            {"admin"}
+                                        </Link>    
+                                    </li>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    
+                                    <li>
                                         <button className="nav-links-mobile-transparent" onClick={logout}>
                                             Cerrar Sesión
                                         </button>

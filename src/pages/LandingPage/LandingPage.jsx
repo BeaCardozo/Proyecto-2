@@ -13,6 +13,9 @@ const LandingPage = (props) => {
   const setSearchKey = props.searchKey
   const movieFinder = props.finder
 
+
+  
+
   
 
   return (
@@ -28,7 +31,7 @@ const LandingPage = (props) => {
       </div>
         <div className="cards-container">
           {Now_playing.map((movie)=>(
-              <Card id={movie.id} title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path} released={true}/>
+              <Card id={movie.id} title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genre_ids} poster={movie.poster_path} released={true}/>
           ))}
         </div>
       </section>
@@ -37,7 +40,7 @@ const LandingPage = (props) => {
         <Title title="Próximos Estrenos"/>
          <div className="cards-container">
          {Upcoming.map((movie)=>(
-              <Card id={movie.id} title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path} released={false}/>
+              <Card id={movie.id} title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genre_ids} poster={movie.poster_path} released={false}/>
           ))}
         </div>
       </section>

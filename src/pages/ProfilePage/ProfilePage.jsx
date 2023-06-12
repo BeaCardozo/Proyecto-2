@@ -28,6 +28,7 @@ function Profile() {
         const firestore = getFirestore();
         const userMoviesCollection = collection(firestore, "users", userUid, "movies");
         const querySnapshot = await getDocs(userMoviesCollection);
+        
         const movies = [];
 
         
@@ -70,7 +71,9 @@ function Profile() {
         const userMoviesCollection = collection(firestore, "users", userUid, "reservations");
         const querySnapshot = await getDocs(userMoviesCollection);
         const movies = [];
-
+        
+        console.log("resultados")
+        console.log
         
 
         for (const doc of querySnapshot.docs) {

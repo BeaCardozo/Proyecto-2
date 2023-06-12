@@ -78,6 +78,10 @@ const Reserve = () => {
       const firestore = getFirestore();
       const reservationsCollection = collection(firestore, "users", userUid, "reservations");
       await addDoc(reservationsCollection, reservationData);
+
+      
+      const reservationsCollection2 = collection(firestore, "Reservations");
+      await addDoc(reservationsCollection2, reservationData);
       
 
       // Muestra un mensaje de éxito o redirige a la página de confirmación de reserva
@@ -86,6 +90,7 @@ const Reserve = () => {
     } catch (error) {
       // Muestra un mensaje de error o redirige a la página de error de reserva
       window.alert("Error al realizar la reserva",error);
+      console.log(error);
      
     }
   };
