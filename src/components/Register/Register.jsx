@@ -11,6 +11,7 @@ import { faEye , faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 
 export default function Register() {
   const { login } = useContext(AuthContext);
+  const { loginWithGoogle } = useContext(AuthContext);
   const [inputNombre, setInputNombre] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
@@ -27,7 +28,29 @@ export default function Register() {
     navigate(path);
   };
 
+  const handleLoginWithGoogle = async () => {
+   
+
+    await loginWithGoogle()
+
+    console.log('termino')
+
+    routeChange("/");
+ 
+    // ...
+        
+     
+    
+
+  };
+
   const registrar = async () => {
+
+    if (!inputNombre || !inputEmail || !inputPassword || !inputConfirm) {
+      window.alert("Por favor, complete todos los campos");
+      return;
+    }
+
     if (inputPassword === inputConfirm) {
       const auth = getAuth();
 
@@ -99,7 +122,7 @@ export default function Register() {
       <button onClick={() => routeChange("/loginpage")} className="account-btn">
         ¿Ya estás registrado? Iniciar Sesión
       </button>
-      <button onClick={signInWithGoogle} className="gray-btn">
+      <button onClick={handleLoginWithGoogle} className="gray-btn">
         <i className="fa-brands fa-google"></i> &nbsp; Registrarse con Google
       </button>
     </div>
