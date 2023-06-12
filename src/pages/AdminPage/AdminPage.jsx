@@ -15,12 +15,21 @@ function AdminPage() {
         const firestore = getFirestore();
         const reservationsCollection = collection(firestore, "Reservations");
         const q = query(reservationsCollection);
-        
-        const unsubscribe = onSnapshot(q, (snapshot) => {
+
+        const unsubscribe = onSnapshot(q, async (snapshot) => {
           const reservationsData = [];
-          snapshot.forEach((doc) => {
-            reservationsData.push({ id: doc.id, ...doc.data() });
+          const promises = snapshot.docs.map(async (doc) => {
+            const reservationData = { id: doc.id, ...doc.data() };
+
+            const movieId = reservationData.movieId;
+            const movieTitle = await getMovieTitle(movieId);
+            reservationData.movieTitle = movieTitle;
+
+            reservationsData.push(reservationData);
           });
+
+          await Promise.all(promises); // Esperar a que todas las promesas se resuelvan
+
           setReservations(reservationsData);
         });
 
@@ -32,6 +41,20 @@ function AdminPage() {
 
     fetchReservations();
   }, []);
+
+  const getMovieTitle = async (movieId) => {
+    try {
+      const apiKey = '33eff93df4270cb083333e09276c2a28';
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}`
+      );
+      const data = await response.json();
+      return data.title;
+    } catch (error) {
+      console.log("Error fetching movie title: ", error);
+      return "Título no disponible";
+    }
+  };
 
   return (
     <div className="main-container">
@@ -46,10 +69,12 @@ function AdminPage() {
               <li key={reservation.id}>
                 <strong>Nombre:</strong> {reservation.name}
                 <br />
-                <strong>Película:</strong> {reservation.movieId}
+                <strong>Película:</strong> {reservation.movieTitle}
                 <br />
                 <strong>Cantidad de Boletos:</strong>{" "}
                 {reservation.ticketQuantity}
+                <br></br>
+                <br></br>
               </li>
             ))}
           </ul>
