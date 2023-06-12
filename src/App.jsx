@@ -8,6 +8,7 @@ import LoginPage from "./pages/LoginPage/LoginPage"
 import Profile from "./pages/ProfilePage/ProfilePage";  
 import Footer from "./components/Footer/Footer"
 import MovieDetails from "./pages/MovieDetails/MovieDetails"
+import MovieDetails2 from "./pages/MovieDetails/MovieDetails2"
 import ReservePage from "./pages/ReservePage/ReservePage"
 import AdminPage from "./pages/AdminPage/AdminPage";
 import { useEffect, useState } from "react"
@@ -74,6 +75,7 @@ function App() {
         <Route path="/loginpage" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/moviedetails/:id" element={<MovieDetails />} />
+        <Route path="/moviedetails2/:id" element={<MovieDetails2 />} />
         <Route path="/reserve/:id" element={<ReservePage/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/admin" element={<AdminPage/>} />

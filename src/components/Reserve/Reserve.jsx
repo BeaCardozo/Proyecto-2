@@ -1,24 +1,46 @@
 import React, { useEffect, useState, useContext} from "react";
 import { useParams } from "react-router-dom";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc,getDocs } from "firebase/firestore";
 import { auth } from "../../Firebase";
 import "../Login/Login.css";
 import "../../App.css";
 import Title from "../Title/Title";
 import { AuthContext } from "../../AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Reserve = () => {
   const [name, setName] = useState('');
   const [identification, setIdentification] = useState('');
   const [email, setEmail] = useState('');
   const [ticketQuantity, setTicketQuantity] = useState(0);
+  const [ticketPrice, setTicketPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalTicketsSold, setTotalTicketsSold] = useState(0);
+  let navigate = useNavigate();
+
   const user = auth.currentUser;
 
   const { id } = useParams(); // Obtener el ID de la película de la URL
+
+
+
+  
+
+  useEffect(() => {
+    const randomPrice = Math.floor(Math.random() * (2500 - 1000 + 1)) + 1000;
+    setTicketPrice(randomPrice);
+  }, []);
+
+  useEffect(() => {
+    const calculatedTotalPrice = ticketQuantity * ticketPrice;
+    setTotalPrice(calculatedTotalPrice);
+  }, [ticketQuantity, ticketPrice]);
   
 
   const handleReserve = async (e) => {
     e.preventDefault();
+
+    console.log("Se han vendido", totalTicketsSold)
 
     try {
       // Verificar si el usuario está autenticado
@@ -31,6 +53,11 @@ const Reserve = () => {
 
       if (!name || !identification || !email || ticketQuantity <= 0) {
         window.alert("Por favor, complete todos los campos y seleccione una cantidad de boletos válida");
+        return;
+      }
+
+      if (totalTicketsSold + ticketQuantity > 20) {
+        window.alert("No puedes reservar más de 20 tickets en total");
         return;
       }
 
@@ -51,9 +78,11 @@ const Reserve = () => {
       const firestore = getFirestore();
       const reservationsCollection = collection(firestore, "users", userUid, "reservations");
       await addDoc(reservationsCollection, reservationData);
+      
 
       // Muestra un mensaje de éxito o redirige a la página de confirmación de reserva
       window.alert("Reserva realizada con éxito");
+      navigate('/');
     } catch (error) {
       // Muestra un mensaje de error o redirige a la página de error de reserva
       window.alert("Error al realizar la reserva",error);
@@ -102,6 +131,22 @@ const Reserve = () => {
           value={ticketQuantity}
           onChange={(e) => setTicketQuantity(e.target.value)}
         />
+
+        <label htmlFor="ticketPrice">Precio por Boleto:</label>
+            <input
+              className="input-number"
+              type="number"
+              value={ticketPrice}
+              readOnly
+            />
+
+        <label htmlFor="totalPrice">Precio Total:</label>
+            <input
+              className="input-number"
+              type="number"
+              value={totalPrice}
+              readOnly
+            />    
 
         <button className="blue-btn" type="submit">
           Comprar

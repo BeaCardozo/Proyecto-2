@@ -22,12 +22,29 @@ const Card=(props)=>{
                         <h4><i class="fa-solid fa-language"></i><strong>Idiomas: </strong>{language}</h4>
                         <h4><i class="fa-light fa-camera-movie"></i><strong>Géneros: </strong></h4> 
                         <h4><i class="fa-light fa-camera-movie"></i><strong>Popularidad: </strong> {popularity}</h4>
+
+
+                        {released ? (
+
                         <button className="blue-btn">
-                        <Link to={{
-                                pathname: `/moviedetails/${id}`,
-                                state: {
-                                    released: true}}}>Ver más</Link>
+
+                          
+                        <Link to={`/moviedetails/${id}`} >
+                                Ver mas
+                        </Link>
                         </button>
+                        ) : (   
+
+                            <button className="blue-btn">
+
+                          
+                            <Link to={`/moviedetails2/${id}`} >
+                                    Ver mas
+                            </Link>
+                            </button>    
+                        )}
+
+
                     </div>
                 </div>
             </div>

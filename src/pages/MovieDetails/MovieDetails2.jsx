@@ -10,7 +10,7 @@ import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 
-function MovieDetails() {
+function MovieDetails2() {
   const location = useLocation()
   const released = true;
   const [movie, setMovie] = useState(null);
@@ -20,26 +20,7 @@ function MovieDetails() {
     navigate(path);
   };
   
-  function ifReleased() {
-    if(released){
-      return(
-          user ? (   
-            <><button className="gray-btn" onClick={handleAddToFavorites}>
-                <i className="fa-regular fa-star"></i>Marcar como favorito
-            </button><button className="blue-btn">
-            <Link to={`/reserve/${id}`}>Comprar Boletos</Link>
-            </button></>
-            ) : (
-            <button className="blue-btn">
-                  <Link to="/loginpage">Iniciar Sesion</Link>
-            </button>
-            ) 
-      )
-    } else {
-      return(
-      <h1>Proximamente en cines</h1>)
-    }
-  }
+  
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -72,6 +53,7 @@ function MovieDetails() {
     runtime,
     spoken_languages,
     credits,
+    release_date
   } = movie;
 
   const actorNames = credits?.cast
@@ -97,6 +79,7 @@ function MovieDetails() {
         window.alert("El usuario no está autenticado");
         
       }
+      console.log(movie)
       
       
   
@@ -147,14 +130,31 @@ function MovieDetails() {
             <li>
               <strong>Duración: </strong> {duration}
             </li>
+
+            
           </ul>
         </div>
 
-        {ifReleased()}
+
+        {user ? (
+
+        <><button className="gray-btn" onClick={handleAddToFavorites}>
+                <i className="fa-regular fa-star"></i>Marcar como favorito
+            </button><button className="blue-btn">
+            Proximamente {release_date}
+            </button></>
+
+            ) : (
+              <button className="blue-btn">
+              Proximamente {release_date}
+              </button>
+            ) }
+           
+            
 
       </div>
     </div>
   );
 }
 
-export default MovieDetails;
+export default MovieDetails2;
