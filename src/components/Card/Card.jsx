@@ -5,12 +5,7 @@ import "../../App.css";
 
 const Card=(props)=>{
     const URL_IMAGE = 'https://image.tmdb.org/t/p/original'
-    const { title, language, popularity, poster, id} = props;
-    const genres = props.genres;
-
-    const genresList = genres
-    ?.map((genre) => genre.name)
-    ?.join(", ");
+    const { title, language, popularity, poster, id, date} = props;
 
     return(
        <div className="container-wrap">
@@ -23,8 +18,8 @@ const Card=(props)=>{
                     <h2>{title}</h2>
                     <hr></hr>
                         <h4><i class="fa-solid fa-language"></i><strong>Idiomas: </strong>{language}</h4>
-                        <h4><i class="fa-light fa-camera-movie"></i><strong>Géneros: {genresList}</strong></h4> 
                         <h4><i class="fa-light fa-camera-movie"></i><strong>Popularidad: </strong> {popularity}</h4>
+                        <h4><i class="fa-light fa-camera-movie"></i><strong>Fecha de estreno: </strong> {date}</h4>
                         <button className="blue-btn">
                         <Link to={{
                                 pathname: `/moviedetails/${id}`,
