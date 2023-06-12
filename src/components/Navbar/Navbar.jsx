@@ -45,9 +45,7 @@ class Navbar extends Component {
                 {user ? (   
 
                 <><li>
-                                    <Link to={"#"} className={"nav-links"}>
-                                        {"Reservar"}
-                                    </Link>
+                                    
                                 </li><li>
                                         <Link to={"profile"} className={"nav-links"}>
                                             {"Perfil"}

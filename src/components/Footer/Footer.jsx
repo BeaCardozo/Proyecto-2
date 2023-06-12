@@ -18,9 +18,8 @@ const Footer =()=>{
                         {user ? ( 
                         <>
                         <Link to= "/"><div><p>Inicio</p></div></Link>
-                        <Link to="#"><div><p>Reservar</p></div></Link>
-                        <Link to="#"><div><p>Información</p></div></Link>
-                        <Link to="#"><div><p>Contacto</p></div></Link></>
+                        <Link to="Profile"><div><p>Perfil</p></div></Link>
+                        </>
 
                         ) : (
                        
