@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa'
+import {FaArrowRight, FaArrowLeft} from 'react-icons/fa'
 import { HeroData } from './HeroData';
 import "./Hero.css";
 
@@ -22,8 +22,8 @@ const Hero = ({hero}) =>{
 
     return(
         <section className='hero-container'>
-            <FaArrowAltCircleLeft className='left_arrow' onClick={prevSlide}/>
-            <FaArrowAltCircleRight className='right_arrow' onClick={nextSlide}/>
+            <FaArrowLeft className='left_arrow' onClick={prevSlide}/>
+            <FaArrowRight className='right_arrow' onClick={nextSlide}/>
             {HeroData.map((hero,index) => {
                 return(
                     <div className={index=== current? 'slide active' : 'slide'} key={index}>

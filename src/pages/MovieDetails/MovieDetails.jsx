@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 function MovieDetails() {
   const location = useLocation()
-  const released = true;
   const [movie, setMovie] = useState(null);
   const { id } = useParams();
   const { user } = useContext(AuthContext);
@@ -21,7 +20,7 @@ function MovieDetails() {
   };
   
   function ifReleased() {
-    if(released){
+    if(status == "Released"){
       return(
           user ? (   
             <><button className="gray-btn" onClick={handleAddToFavorites}>
@@ -72,6 +71,7 @@ function MovieDetails() {
     runtime,
     spoken_languages,
     credits,
+    status
   } = movie;
 
   const actorNames = credits?.cast
@@ -137,9 +137,6 @@ function MovieDetails() {
           <ul>
             <li>
               <strong>Sinopsis: </strong> {overview}
-            </li>
-            <li>
-              <strong>Actores: </strong> {actorNames}
             </li>
             <li>
               <strong>Idiomas: </strong> {languageNames}

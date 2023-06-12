@@ -1,12 +1,10 @@
 .hero-container{
     position: relative;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     display: flex;
     justify-content:center;
     align-items: center;
-    background-size: cover;
-    top: 0;
     right: 0;
     left: 0;
     margin-top: -250px;
@@ -21,22 +19,28 @@
     position: absolute;
     top: 50%;
     right: 32px;
-    font-size: 3rem;
+    font-size: 4rem;
     color: #242582;
     z-index: 10;
     cursor: pointer;
     user-select: none;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50px;
 }
 
 .left_arrow{
     position: absolute;
     top: 50%;
     left: 32px;
-    font-size: 3rem;
+    font-size: 4rem;
     color: #242582;
     z-index: 10;
     cursor: pointer;
     user-select: none;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50px;
 }
 
 .slide {
