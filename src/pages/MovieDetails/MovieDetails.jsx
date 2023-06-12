@@ -150,7 +150,20 @@ function MovieDetails() {
           </ul>
         </div>
 
-        {ifReleased()}
+        {user ? (   
+
+      <><button className="gray-btn" onClick={handleAddToFavorites}>
+          <i className="fa-regular fa-star"></i>Marcar como favorito
+      </button><button className="blue-btn">
+            <Link to={`/reserve/${id}`}>Comprar Boletos</Link>
+      </button></>
+
+      ) : (
+
+      <button className="blue-btn">
+            <Link to="/loginpage">Iniciar Sesion</Link>
+      </button>
+)}
       </div>
     </div>
   );
