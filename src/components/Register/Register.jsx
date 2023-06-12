@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithGoogle } from "../../Firebase.jsx";
 import { AuthContext } from "../../AuthContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye , faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 
 export default function Register() {
   const { login } = useContext(AuthContext);
@@ -13,6 +15,11 @@ export default function Register() {
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const [inputConfirm, setConfirm] = useState("");
+
+  /*Ver y esconder contraseña*/
+  const [visible, setVisibility] = useState(false);
+  const Icon =  <FontAwesomeIcon icon={visible ? faEyeSlash : faEye} onClick={() => setVisibility(visibility =>!visibility)}/>;
+  const InputType = visible ? "text" : "password";
 
   let navigate = useNavigate();
 
@@ -68,14 +75,15 @@ export default function Register() {
           id="email"
           name="email"
         />
-        <label htmlFor="password">Contraseña: </label>
-        <input
-          onChange={(e) => setInputPassword(e.target.value)}
-          type="password"
-          placeholder="******"
-          id="password"
-          name="password"
-        />
+        <label htmlFor="password">Contraseña: <i className="password-icon">{Icon}</i></label>
+          <input
+            onChange={(e) => setInputPassword(e.target.value)}
+            type= {InputType}
+            placeholder="******"
+            id="password"
+            className="input-field"
+            name="password"
+          />
         <label htmlFor="password2">Verificar contraseña: </label>
         <input
           onChange={(e) => setConfirm(e.target.value)}

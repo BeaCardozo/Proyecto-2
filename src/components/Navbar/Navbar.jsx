@@ -48,15 +48,15 @@ class Navbar extends Component {
                                         {"Reservar"}
                                     </Link>
                                 </li><li>
-                                        <Link to={"#"} className={"nav-links"}>
-                                            {"Contacto"}
+                                        <Link to={"profile"} className={"nav-links"}>
+                                            {"Perfil"}
                                         </Link>
                                     </li><li>
                                         <Link to={"#"} className={"nav-links"}>
                                             {"Informacion"}
                                         </Link>
                                     </li><li>
-                                        <button className="nav-links-mobile" onClick={logout}>
+                                        <button className={"nav-links-mobile-transparent"} onClick={logout}>
                                             Cerrar Sesión
                                         </button>
                                     </li></>

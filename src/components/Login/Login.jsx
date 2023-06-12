@@ -6,6 +6,8 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../../Firebase.jsx";
 import { AuthContext } from "../../AuthContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye , faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 
 export default function Login() {
   const { login } = useContext(AuthContext);
@@ -13,6 +15,11 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let navigate = useNavigate();
+
+  /*Ver y esconder contraseña*/
+  const [visible, setVisibility] = useState(false);
+  const Icon =  <FontAwesomeIcon icon={visible ? faEyeSlash : faEye} onClick={() => setVisibility(visibility =>!visibility)}/>;
+  const InputType = visible ? "text" : "password";
 
   const routeChange = (path) => {
     navigate(path);
@@ -61,10 +68,10 @@ export default function Login() {
           id="email"
           name="email"
         />
-        <label htmlFor="email">Contraseña: </label>
+        <label htmlFor="email">Contraseña: <i className="password-icon">{Icon}</i></label>
         <input
           onChange={(e) => setPassword(e.target.value)}
-          type="password"
+          type={InputType}
           placeholder="******"
           id="password"
           name="password"

@@ -91,4 +91,5 @@ export async function signUp(email, password) {
   return { result, error };
 }
 
+export { app,auth };
 

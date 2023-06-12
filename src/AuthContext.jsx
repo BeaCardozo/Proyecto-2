@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -20,10 +21,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const routeChange = (path) => {
+    navigate(path);
+  };
+
   const logout = async () => {
     try {
+
+      
       await signOut(auth);
       setUser(null);
+      routeChange("/");
+      
     } catch (error) {
       // Manejar el error de cierre de sesión
     }
