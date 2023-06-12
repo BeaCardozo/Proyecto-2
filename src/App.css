@@ -123,11 +123,39 @@ section {
   width: 100%;
 }
 
+@media screen and (max-width: 850px){
+  .movies-section{
+    margin-top: -400px;
+  }
 
+
+  .main {
+      margin-top:140px ;
+  }
+
+  .reservations-form{
+    margin: 0 auto;
+    width: 80%;
+    height: 600px;
+    justify-content: flex-start;
+    border-radius: 10px;
+    padding: 70px 90px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
+    overflow-y: scroll;
+    background-color: #DCDCDC;
+    border: "none";
+  }
+  
+}
 
 @media screen and (max-width: 650px){
   .movies-section{
-    margin-top: -500px;
+    margin-top: -300px;
+  }
+
+
+  .main {
+      margin-top:300px ;
   }
 
   .reservations-form{
