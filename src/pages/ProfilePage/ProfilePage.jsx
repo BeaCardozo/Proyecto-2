@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getFirestore, collection, query, getDocs, doc, getDoc } from "firebase/firestore";
 import { auth } from "../../Firebase";
 import "./Profile.css"; // Importa tu archivo CSS para los estilos personalizados
+import "../../App.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faStar} from '@fortawesome/free-solid-svg-icons'
 import Card from "../../components/Card/Card";
 import Card2 from "../../components/Card/Card2";
 import Title from "../../components/Title/Title";
@@ -107,34 +110,31 @@ function Profile() {
   }, []);
 
   return (
-    <section className="next_releases-section">
-      <Title title="Pelis Favoritas" />
+    <section className="profile-section">
+      <div className="container-form">
+        <Title title="Perfil" description= "¡Bienvenido! Aquí encontrarás tus películas favoritas y las entradas compradas!"/>
+      </div>
       
-      <div className="cards-container">
-      <h1 style={{ textAlign: 'center', fontWeight: 'bold' }}>PELICULAS FAVORITAS</h1>  
-
-      <div className="cards-container">
-        {favoriteMovies.map((movie) => (
-          <Card
-            key={movie.id}
-            id={movie.id}
-            title={movie.title}
-            language={movie.original_language}
-            popularity={movie.popularity}
-            genres={movie.genres}
-            poster={movie.poster_path}
-            
-          />
-        ))}
-
-      </div>  
+      <div className="favorite-container">
+        <Title title="Favoritas"/>
+        <div className="cards-container">
+          {favoriteMovies.map((movie) => (
+            <Card
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              language={movie.original_language}
+              popularity={movie.popularity}
+              genres={movie.genres}
+              poster={movie.poster_path}
+              
+            />
+          ))}
+        </div>  
       </div>
 
-
-  
-      
-      <div className="cards-container">
-      <h1 style={{ textAlign: 'center', fontWeight: 'bold' }}>PELICULAS Reservadas</h1>  
+      <div className="reservation-container">
+      <Title title="Reservaciones" description= ""/>
 
       <div className="cards-container">
         {ReservedMovies.map((movie) => (

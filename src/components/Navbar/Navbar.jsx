@@ -1,6 +1,7 @@
 import React, { Component, useContext, useState } from "react";
 import { MenuData } from "./NavbarData";
 import "./Navbar.css";
+import "../../App.css"
 import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -52,7 +53,7 @@ class Navbar extends Component {
                                             {"Perfil"}
                                         </Link>    
                                     </li><li>
-                                        <button className="nav-links-mobile" onClick={logout}>
+                                        <button className="nav-links-mobile-transparent" onClick={logout}>
                                             Cerrar Sesión
                                         </button>
                                     </li></>
