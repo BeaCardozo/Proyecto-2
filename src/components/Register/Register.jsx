@@ -6,13 +6,21 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithGoogle } from "../../Firebase.jsx";
 import { AuthContext } from "../../AuthContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEye , faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 
 export default function Register() {
   const { login } = useContext(AuthContext);
+  const { loginWithGoogle } = useContext(AuthContext);
   const [inputNombre, setInputNombre] = useState("");
   const [inputEmail, setInputEmail] = useState("");
   const [inputPassword, setInputPassword] = useState("");
   const [inputConfirm, setConfirm] = useState("");
+
+  /*Ver y esconder contraseña*/
+  const [visible, setVisibility] = useState(false);
+  const Icon =  <FontAwesomeIcon icon={visible ? faEyeSlash : faEye} onClick={() => setVisibility(visibility =>!visibility)}/>;
+  const InputType = visible ? "text" : "password";
 
   let navigate = useNavigate();
 
@@ -20,7 +28,29 @@ export default function Register() {
     navigate(path);
   };
 
+  const handleLoginWithGoogle = async () => {
+   
+
+    await loginWithGoogle()
+
+    console.log('termino')
+
+    routeChange("/");
+ 
+    // ...
+        
+     
+    
+
+  };
+
   const registrar = async () => {
+
+    if (!inputNombre || !inputEmail || !inputPassword || !inputConfirm) {
+      window.alert("Por favor, complete todos los campos");
+      return;
+    }
+
     if (inputPassword === inputConfirm) {
       const auth = getAuth();
 
@@ -68,14 +98,15 @@ export default function Register() {
           id="email"
           name="email"
         />
-        <label htmlFor="password">Contraseña: </label>
-        <input
-          onChange={(e) => setInputPassword(e.target.value)}
-          type="password"
-          placeholder="******"
-          id="password"
-          name="password"
-        />
+        <label htmlFor="password">Contraseña: <i className="password-icon">{Icon}</i></label>
+          <input
+            onChange={(e) => setInputPassword(e.target.value)}
+            type= {InputType}
+            placeholder="******"
+            id="password"
+            className="input-field"
+            name="password"
+          />
         <label htmlFor="password2">Verificar contraseña: </label>
         <input
           onChange={(e) => setConfirm(e.target.value)}
@@ -91,7 +122,7 @@ export default function Register() {
       <button onClick={() => routeChange("/loginpage")} className="account-btn">
         ¿Ya estás registrado? Iniciar Sesión
       </button>
-      <button onClick={signInWithGoogle} className="gray-btn">
+      <button onClick={handleLoginWithGoogle} className="gray-btn">
         <i className="fa-brands fa-google"></i> &nbsp; Registrarse con Google
       </button>
     </div>

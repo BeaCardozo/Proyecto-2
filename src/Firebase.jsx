@@ -39,12 +39,13 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 
+
 // Iniciar con Google
 
 
 
 
-export const signInWithGoogle = () => {
+export const signInWithGoogle = (auth , provider) => {
   return new Promise((resolve, reject) => {
     
 
@@ -57,7 +58,7 @@ export const signInWithGoogle = () => {
         localStorage.setItem("email", email);
 
         
-            clearInterval(interval);
+          
             resolve(email);
           
     
@@ -91,4 +92,5 @@ export async function signUp(email, password) {
   return { result, error };
 }
 
+export { app,auth,provider };
 

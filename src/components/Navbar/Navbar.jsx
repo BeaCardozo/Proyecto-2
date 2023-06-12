@@ -1,6 +1,7 @@
 import React, { Component, useContext, useState } from "react";
 import { MenuData } from "./NavbarData";
 import "./Navbar.css";
+import "../../App.css"
 import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -44,19 +45,29 @@ class Navbar extends Component {
                 {user ? (   
 
                 <><li>
-                                    <Link to={"#"} className={"nav-links"}>
-                                        {"Reservar"}
-                                    </Link>
+                                    
                                 </li><li>
-                                        <Link to={"#"} className={"nav-links"}>
-                                            {"Contacto"}
-                                        </Link>
+                                        <Link to={"profile"} className={"nav-links"}>
+                                            {"Perfil"}
+                                        </Link>    
                                     </li><li>
-                                        <Link to={"#"} className={"nav-links"}>
-                                            {"Informacion"}
-                                        </Link>
-                                    </li><li>
-                                        <button className="nav-links-mobile" onClick={logout}>
+                                  
+
+                                    </li>
+                                  
+                                    {user.email == "admin@gmail.com" ? (
+
+                                    <li>
+                                        <Link to={"admin"} className={"nav-links"}>
+                                            {"admin"}
+                                        </Link>    
+                                    </li>
+                                    ) : (
+                                        <></>
+                                    )}
+                                    
+                                    <li>
+                                        <button className="nav-links-mobile-transparent" onClick={logout}>
                                             Cerrar Sesión
                                         </button>
                                     </li></>
