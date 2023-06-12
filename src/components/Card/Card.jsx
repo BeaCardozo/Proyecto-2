@@ -7,6 +7,7 @@ const Card=(props)=>{
     const URL_IMAGE = 'https://image.tmdb.org/t/p/original'
     const { title, language, popularity, poster, id, date} = props;
 
+
     return(
        <div className="container-wrap">
             <div className ="card">
@@ -21,10 +22,7 @@ const Card=(props)=>{
                         <h4><i class="fa-light fa-camera-movie"></i><strong>Popularidad: </strong> {popularity}</h4>
                         <h4><i class="fa-light fa-camera-movie"></i><strong>Fecha de estreno: </strong> {date}</h4>
                         <button className="blue-btn">
-                        <Link to={{
-                                pathname: `/moviedetails/${id}`,
-                                state: {
-                                    released: true}}}>Ver más</Link>
+                        <Link to={`/moviedetails/${id}`}>Ver más</Link>
                         </button>
                     </div>
                 </div>

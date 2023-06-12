@@ -37,7 +37,7 @@ const LandingPage = (props) => {
         <Title title="Próximos Estrenos"/>
          <div className="cards-container">
          {Upcoming.map((movie)=>(
-              <Card id={movie.id} title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path} released={false} date={movie.release_date}/>
+              <Card id={movie.id} title={movie.title} language={movie.original_language} popularity={movie.popularity} genres={movie.genres} poster={movie.poster_path}/>
           ))}
         </div>
       </section>
